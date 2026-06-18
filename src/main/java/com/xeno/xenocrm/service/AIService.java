@@ -334,8 +334,6 @@ public class AIService {
 
         );
 
-
-
         return email.toString();
 
     }
