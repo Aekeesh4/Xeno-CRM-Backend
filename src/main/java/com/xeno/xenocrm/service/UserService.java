@@ -39,16 +39,23 @@ public class UserService {
 
     public User login(String email, String password) {
 
-        User user =
-                userRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
 
-        if (user != null &&
-                passwordEncoder.matches(
-                        password,
-                        user.getPassword()
-                )) {
+        System.out.println("EMAIL = " + email);
 
-            return user;
+        if (user != null) {
+            System.out.println("DB PASSWORD = " + user.getPassword());
+
+            boolean matched =
+                    passwordEncoder.matches(
+                            password,
+                            user.getPassword());
+
+            System.out.println("MATCHED = " + matched);
+
+            if (matched) {
+                return user;
+            }
         }
 
         return null;
