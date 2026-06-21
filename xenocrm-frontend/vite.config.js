@@ -6,8 +6,6 @@ export default defineConfig({
 
   preview: {
     host: '0.0.0.0',
-    allowedHosts: [
-      'charismatic-perfection-production-e18e.up.railway.app'
-    ]
+    allowedHosts: true
   }
 })
