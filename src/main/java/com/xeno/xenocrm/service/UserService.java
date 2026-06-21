@@ -44,6 +44,7 @@ public class UserService {
         System.out.println("EMAIL = " + email);
 
         if (user != null) {
+
             System.out.println("DB PASSWORD = " + user.getPassword());
 
             boolean matched =
@@ -56,6 +57,9 @@ public class UserService {
             if (matched) {
                 return user;
             }
+        }
+        else{
+            System.out.println("USER NOT FOUND");
         }
 
         return null;
