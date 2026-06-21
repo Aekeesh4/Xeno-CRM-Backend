@@ -24,7 +24,11 @@ public class AuthController {
     public User register(
             @RequestBody User user) {
 
-        return userService.saveUser(user);
+        User saved = userService.saveUser(user);
+
+        System.out.println("REGISTERED = " + saved.getEmail());
+
+        return saved;
     }
 
     @PostMapping("/login")

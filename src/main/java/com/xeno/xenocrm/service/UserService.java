@@ -43,23 +43,22 @@ public class UserService {
 
         System.out.println("EMAIL = " + email);
 
-        if (user != null) {
-
-            System.out.println("DB PASSWORD = " + user.getPassword());
-
-            boolean matched =
-                    passwordEncoder.matches(
-                            password,
-                            user.getPassword());
-
-            System.out.println("MATCHED = " + matched);
-
-            if (matched) {
-                return user;
-            }
-        }
-        else{
+        if(user == null){
             System.out.println("USER NOT FOUND");
+            return null;
+        }
+
+        System.out.println("DB PASSWORD = " + user.getPassword());
+
+        boolean matched =
+                passwordEncoder.matches(
+                        password,
+                        user.getPassword());
+
+        System.out.println("MATCHED = " + matched);
+
+        if(matched){
+            return user;
         }
 
         return null;
