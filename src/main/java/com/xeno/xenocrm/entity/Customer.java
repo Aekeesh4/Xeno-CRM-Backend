@@ -20,8 +20,22 @@ public class Customer {
 
     private String status;
 
+
+    // ===== AI FIELDS =====
+
+    private String segment;
+
+    private Integer churnRisk;
+
+    @Column(length = 1000)
+    private String aiInsight;
+
+    private String revenuePotential;
+
+
     public Customer() {
     }
+
 
     public Long getId() {
         return id;
@@ -31,6 +45,8 @@ public class Customer {
         this.id = id;
     }
 
+
+
     public String getName() {
         return name;
     }
@@ -38,6 +54,8 @@ public class Customer {
     public void setName(String name) {
         this.name = name;
     }
+
+
 
     public String getEmail() {
         return email;
@@ -47,6 +65,8 @@ public class Customer {
         this.email = email;
     }
 
+
+
     public String getPhone() {
         return phone;
     }
@@ -54,6 +74,8 @@ public class Customer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 
     public String getCompany() {
         return company;
@@ -63,6 +85,8 @@ public class Customer {
         this.company = company;
     }
 
+
+
     public String getStatus() {
         return status;
     }
@@ -70,4 +94,45 @@ public class Customer {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
+
+    public String getSegment() {
+        return segment;
+    }
+
+    public void setSegment(String segment) {
+        this.segment = segment;
+    }
+
+
+
+    public Integer getChurnRisk() {
+        return churnRisk;
+    }
+
+    public void setChurnRisk(Integer churnRisk) {
+        this.churnRisk = churnRisk;
+    }
+
+
+
+    public String getAiInsight() {
+        return aiInsight;
+    }
+
+    public void setAiInsight(String aiInsight) {
+        this.aiInsight = aiInsight;
+    }
+
+
+
+    public String getRevenuePotential() {
+        return revenuePotential;
+    }
+
+    public void setRevenuePotential(String revenuePotential) {
+        this.revenuePotential = revenuePotential;
+    }
+
 }
