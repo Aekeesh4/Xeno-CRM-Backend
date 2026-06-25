@@ -103,11 +103,11 @@ Generate follow-up strategy."
 
             value={question}
 
-            onChange={(e) =>
+            onChange={(e) =>{
 
-              setQuestion(e.target.value)
+              setQuestion(e.target.value);
 
-            }
+            }}
 
           />
 
