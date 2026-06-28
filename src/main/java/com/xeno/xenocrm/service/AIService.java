@@ -267,6 +267,7 @@ Return only readable text.
         int customers = customerRepository.findAll().size();
 
         int leads = leadRepository.findAll().size();
+
         long vipCustomers =
                 customerRepository.findAll()
                         .stream()
@@ -294,13 +295,19 @@ Return only readable text.
         String prompt = """
 You are Xeno CRM AI Assistant.
 
-You are connected to a CRM system.
+You are connected to a real CRM system.
 
 CRM Statistics
 
-Customers : %d
+Total Customers : %d
 
-Leads : %d
+Total Leads : %d
+
+VIP Customers : %d
+
+Inactive Customers : %d
+
+Hot Leads : %d
 
 User Question:
 
@@ -308,7 +315,9 @@ User Question:
 
 Answer professionally.
 
-Keep the answer under 250 words.
+Use the CRM statistics while answering.
+
+Keep answer under 250 words.
 
 If appropriate include:
 

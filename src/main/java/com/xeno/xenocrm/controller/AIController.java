@@ -80,7 +80,7 @@ public class AIController {
             @RequestBody Map<String, String> request
 
     ) {
-
+        System.out.println("Question Received = " + request.get("question"));
         return aiService.chatWithAI(
 
                 request.get("question")
