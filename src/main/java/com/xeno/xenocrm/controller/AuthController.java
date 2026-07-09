@@ -5,6 +5,8 @@ import com.xeno.xenocrm.service.UserService;
 import com.xeno.xenocrm.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.xeno.xenocrm.dto.ForgotPasswordRequest;
+import com.xeno.xenocrm.dto.ResetPasswordRequest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +62,37 @@ public class AuthController {
             response.put("message", "Invalid Credentials");
 
         }
+
+        return response;
+    }
+    @PostMapping("/forgot-password")
+    public Map<String, String> forgotPassword(
+            @RequestBody ForgotPasswordRequest request) {
+
+        Map<String, String> response = new HashMap<>();
+
+        String message =
+                userService.forgotPassword(
+                        request.getEmail()
+                );
+
+        response.put("message", message);
+
+        return response;
+    }
+    @PostMapping("/reset-password")
+    public Map<String, String> resetPassword(
+            @RequestBody ResetPasswordRequest request) {
+
+        Map<String, String> response = new HashMap<>();
+
+        String message =
+                userService.resetPassword(
+                        request.getToken(),
+                        request.getPassword()
+                );
+
+        response.put("message", message);
 
         return response;
     }

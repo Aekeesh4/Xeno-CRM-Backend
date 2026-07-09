@@ -5,7 +5,9 @@ import com.xeno.xenocrm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
 @Service
 public class UserService {
 
@@ -15,6 +17,8 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private EmailService emailService;
     public User saveUser(User user) {
 
         User existingUser =
@@ -62,5 +66,64 @@ public class UserService {
         }
 
         return null;
+    }
+    public String forgotPassword(String email) {
+
+        User user = userRepository.findByEmail(email);
+
+        if (user == null) {
+            return "User not found";
+        }
+
+        String token = UUID.randomUUID().toString();
+
+        user.setResetToken(token);
+        user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15));
+
+        userRepository.save(user);
+
+        String resetLink =
+                "http://localhost:5173/reset-password?token=" + token;
+
+        String body =
+                "Hi " + user.getName() + ",\n\n"
+                        + "Click the link below to reset your password:\n\n"
+                        + resetLink
+                        + "\n\nThis link will expire in 15 minutes.";
+
+        emailService.sendEmail(
+                user.getEmail(),
+                "Reset Your XenoCRM Password",
+                body
+        );
+
+        return "Password reset link sent successfully.";
+    }
+
+    public String resetPassword(String token, String newPassword) {
+
+        Optional<User> optionalUser =
+                userRepository.findByResetToken(token);
+
+        if (optionalUser.isEmpty()) {
+            return "Invalid token";
+        }
+
+        User user = optionalUser.get();
+
+        if (user.getResetTokenExpiry().isBefore(LocalDateTime.now())) {
+            return "Reset token has expired";
+        }
+
+        user.setPassword(
+                passwordEncoder.encode(newPassword)
+        );
+
+        user.setResetToken(null);
+        user.setResetTokenExpiry(null);
+
+        userRepository.save(user);
+
+        return "Password reset successful.";
     }
 }
