@@ -13,14 +13,12 @@ function Login() {
     try {
 
       const response = await fetch(
-        "https://xeno-crm-production-1dfc.up.railway.app/api/auth/login",
+        "http://localhost:9090/api/auth/login",
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             email,
             password,
@@ -34,15 +32,8 @@ function Login() {
 
       if (data.token) {
 
-        localStorage.setItem(
-          "token",
-          data.token
-        );
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify(data.user)
-        );
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
 
         alert("Login Successful");
 
@@ -65,12 +56,10 @@ function Login() {
   };
 
   return (
-
     <div
       className="container mt-5"
       style={{ maxWidth: "600px" }}
     >
-
       <div
         className="p-5 rounded shadow"
         style={{
@@ -79,9 +68,7 @@ function Login() {
         }}
       >
 
-        <h1
-          className="text-center mb-4"
-        >
+        <h1 className="text-center mb-4">
           Login
         </h1>
 
@@ -90,34 +77,36 @@ function Login() {
           className="form-control mb-3"
           placeholder="Enter your email"
           value={email}
-          onChange={(e) =>
-            setEmail(e.target.value)
-          }
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
-          className="form-control mb-4"
+          className="form-control mb-3"
           placeholder="Enter your password"
           value={password}
-          onChange={(e) =>
-            setPassword(e.target.value)
-          }
+          onChange={(e) => setPassword(e.target.value)}
         />
 
         <button
           className="btn btn-primary w-100"
           onClick={handleLogin}
         >
-
           Login
-
         </button>
 
+        <div className="text-end mt-3">
+          <button
+            type="button"
+            className="btn btn-link text-info text-decoration-none p-0"
+            onClick={() => navigate("/forgot-password")}
+          >
+            Forgot Password?
+          </button>
+        </div>
+
       </div>
-
     </div>
-
   );
 
 }

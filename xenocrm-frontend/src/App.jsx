@@ -15,7 +15,8 @@ import Profile from "./pages/Profile.jsx";
 import AICopilot from "./pages/AICopilot.jsx";
 import AIAssistant from "./pages/AIAssistant";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-
+import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 function App() {
 
   const token = localStorage.getItem("token");
@@ -454,6 +455,14 @@ function App() {
 
             element={<Login />}
 
+          />
+          <Route
+              path="/reset-password"
+              element={<ResetPassword />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
           />
 
 

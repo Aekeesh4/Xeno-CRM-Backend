@@ -186,7 +186,7 @@ const sendEmail = async () => {
 
     await fetch(
 
-      "https://xeno-crm-production-1dfc.up.railway.app/api/email/send",
+      "http://localhost:9090/api/email/send",
 
       {
 
